@@ -17,11 +17,19 @@ namespace TextToClip
     {
         public void FromVegas(Vegas vegas)
         {
+            string path = getFilePath();
             
-            List<string> rawData = readFromFile();
-            printList(rawData);
+            if(System.IO.File.Exists(path) == false)
+            {
+                MessageBox.Show("File does not exist");
+                return;
+            }
+            string directory = (new System.IO.FileInfo(path)).Directory.FullName;
+            List<string> data = readFromFile(path);
+            //List<string> rawData = readFromFile();
+            // printList(rawData);
 
-            
+
 
             PlugInNode node = vegas.Generators;
             //Load the selected Track
@@ -29,7 +37,7 @@ namespace TextToClip
             //Load selected events from Track
             TrackEvent[] events = getSelectedEventsInTrack(track);
 
-            if (events.Length != rawData.Count)
+            if (events.Length != data.Count)
             {
                 MessageBox.Show("The number of input and clips does not match");
                 return;
@@ -129,6 +137,37 @@ namespace TextToClip
             }
 
             return textMedia;
+        }
+
+        private string getFilePath()
+        {
+            string path = "";
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "txt files (*.txt)|*.txt";
+                ofd.RestoreDirectory = true;
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    path = ofd.FileName;
+ 
+                }
+            }
+            return path;
+        }
+
+        private List<string> readFromFile(string path)
+        {
+            
+            string[] raw = System.IO.File.ReadAllLines(path);
+            List<string> data = new List<string>();
+            foreach (string row in raw)
+            {
+                if (row.Trim().Length != 0)
+                    data.Add(row.Trim());
+            }
+            data.Reverse();
+            return data;
+
         }
 
         private List<string> readFromFile()
