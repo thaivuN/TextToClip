@@ -31,6 +31,7 @@ namespace TextToClip
 
 
 
+
             PlugInNode node = vegas.Generators;
             //Load the selected Track
             Track track = getSelectedTrack(vegas.Project);
@@ -43,19 +44,22 @@ namespace TextToClip
                 return;
             }
 
+            List<string> ranks = createRanks(data.Count);
+            List<string> shows = getShows(data, " -|- ");
+            List<string> songs = getSongs(data, " -|- ");
+
             //Get the Text media
             //Media txt_media = createTextMedia(vegas);
 
             //Create Ranking Track and Text events
             VideoTrack track1 = createTrackAbove(vegas.Project, track);
-            VideoEvent[] rankTexts = createText(vegas,track1, events, Preset.Rank);
+            VideoEvent[] rankTexts = createText(vegas,track1, events, Preset.Rank, ranks);
             //Create Title Track and Text events
             VideoTrack track2 = createTrackAbove(vegas.Project, track);
-            VideoEvent[] titleTexts = createText(vegas,track2, events, Preset.Title);     
+            VideoEvent[] titleTexts = createText(vegas,track2, events, Preset.Title, shows);     
             //Create Songs Track and Text events
             VideoTrack track3 = createTrackAbove(vegas.Project, track);
-            VideoEvent[] songTexts = createText(vegas, track3, events, Preset.Song);
-
+            VideoEvent[] songTexts = createText(vegas, track3, events, Preset.Song, songs);
 
         }
 
@@ -88,10 +92,10 @@ namespace TextToClip
             return tr;
         }
 
-        private VideoEvent[] createText(Vegas vegas, VideoTrack track, TrackEvent[] eventsBelow, Preset preset)
+        private VideoEvent[] createText(Vegas vegas, VideoTrack track, TrackEvent[] eventsBelow, Preset preset, List<string> values)
         {
             List<VideoEvent> events = new List<VideoEvent>();
-            
+            int i = 0;
             foreach(TrackEvent subEvent in eventsBelow)
             {
                 Media media = createTextMedia(vegas, preset);
@@ -100,7 +104,7 @@ namespace TextToClip
                 OFXEffect ofxEffect = media.Generator.OFXEffect;
                 OFXStringParameter tparam = (OFXStringParameter) ofxEffect.FindParameterByName("Text");
 
-                string value = replaceString(tparam.Value, getDefaultString(preset),randomText());
+                string value = replaceString(tparam.Value, getDefaultString(preset),values[i++]);
                 tparam.Value = value;
                 //string rand = randomText();
             }
@@ -272,6 +276,39 @@ namespace TextToClip
             encoded.Reverse();
 
             return encoded;
+        }
+
+        private List<string> createRanks(int size)
+        {
+            List<string> ranks = new List<string>();
+            int rank = size ;
+            for(int i = 0; i < size; i++)
+            {
+                ranks.Add((rank--).ToString());
+            }
+            return ranks;
+        }
+
+        private List<string> getShows(List<string> data, string delimeter)
+        {
+            List<string> shows = new List<string>();
+            foreach(string row in data)
+            {
+                string[] splitData = row.Split(new[] { delimeter }, StringSplitOptions.RemoveEmptyEntries);
+                shows.Add(splitData[0].Trim());
+            }
+            return shows;
+        }
+
+        private List<string> getSongs(List<string> data, string delimeter)
+        {
+            List<string> songs = new List<string>();
+            foreach(string row in data)
+            {
+                string[] splitData = row.Split(new[] { delimeter}, StringSplitOptions.RemoveEmptyEntries);
+                songs.Add(splitData[1].Trim());
+            }
+            return songs;
         }
     }
 }
