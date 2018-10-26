@@ -23,3 +23,10 @@ C:\Users\thaiv\source\repos\TextToClip\TextToClip\obj\Debug\TextToClip.csproj.Co
 C:\Users\thaiv\source\repos\TextToClip\TextToClip\obj\Debug\TextToClip.csproj.CopyComplete
 C:\Users\thaiv\source\repos\TextToClip\TextToClip\obj\Debug\TextToClip.dll
 C:\Users\thaiv\source\repos\TextToClip\TextToClip\obj\Debug\TextToClip.pdb
+E:\MDThai\Scripts\TextToClip\TextToClip\bin\Debug\TextToClip.dll
+E:\MDThai\Scripts\TextToClip\TextToClip\bin\Debug\TextToClip.pdb
+E:\MDThai\Scripts\TextToClip\TextToClip\obj\Debug\TextToClip.csproj.CoreCompileInputs.cache
+E:\MDThai\Scripts\TextToClip\TextToClip\obj\Debug\TextToClip.csproj.CopyComplete
+E:\MDThai\Scripts\TextToClip\TextToClip\obj\Debug\TextToClip.dll
+E:\MDThai\Scripts\TextToClip\TextToClip\obj\Debug\TextToClip.pdb
+E:\MDThai\Scripts\TextToClip\TextToClip\bin\Debug\TextToClip.cs

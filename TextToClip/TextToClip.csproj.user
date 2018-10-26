@@ -4,4 +4,8 @@
     <StartAction>Program</StartAction>
     <StartProgram>C:\Program Files\Sony\Vegas Pro 13.0\vegas130.exe</StartProgram>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files\Sony\Vegas Pro 13.0\vegas130.exe</StartProgram>
+  </PropertyGroup>
 </Project>

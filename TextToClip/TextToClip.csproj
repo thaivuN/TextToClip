@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Sony.Vegas">
-      <HintPath>..\..\..\..\..\..\Program Files\Sony\Vegas Pro 13.0\Sony.Vegas.dll</HintPath>
+      <HintPath>C:\Program Files\Sony\Vegas Pro 13.0\Sony.Vegas.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,7 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TextToClip.cs" />
+    <Compile Include="TextToClip.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
